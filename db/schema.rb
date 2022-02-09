@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_27_142438) do
+ActiveRecord::Schema.define(version: 2021_04_27_142548) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "documents", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "path", null: false
+    t.string "content_base64", null: false
+    t.date "deadline_at", null: false
+    t.boolean "auto_close", default: true, null: false
+    t.boolean "sequence_enabled", default: false, null: false
+    t.integer "remind_interval", default: 3, null: false
+    t.string "state"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "integrations_webhook_state_transitions", force: :cascade do |t|
     t.bigint "webhook_id", null: false

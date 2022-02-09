@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 module ClientAPI
   module V1
     class BaseAPI < Grape::API

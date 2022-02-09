@@ -11,7 +11,9 @@ RSpec.describe Integrations::WebhookProviders, type: :enumeration do
 
   describe '.provider_object' do
     it 'returns a new instance from polymorphic provider object' do
-      expect(described_class.provider_object('click_sign')).to be_an_instance_of(Integrations::WebhookProviders::ClickSign)
+      expect(described_class.provider_object('click_sign')).to be_an_instance_of(
+        Integrations::WebhookProviders::ClickSign
+      )
     end
   end
 

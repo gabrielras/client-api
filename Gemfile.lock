@@ -156,9 +156,6 @@ GEM
     ffi (1.15.4)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    grape-entity (0.9.0)
-      activesupport (>= 3.0.0)
-      multi_json (>= 1.3.2)
     hashdiff (1.0.1)
     httparty (0.20.0)
       mime-types (~> 3.0)
@@ -182,7 +179,6 @@ GEM
     mini_mime (1.1.2)
     minitest (5.14.4)
     msgpack (1.4.2)
-    multi_json (1.15.0)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     mustermann (1.1.1)
@@ -343,7 +339,6 @@ DEPENDENCIES
   factory_bot_rails (= 6.2.0)
   faker (= 2.18.0)
   grape!
-  grape-entity (= 0.9.0)
   httparty (= 0.20.0)
   listen (~> 3.3)
   pg (~> 1.1)
@@ -372,4 +367,4 @@ RUBY VERSION
    ruby 3.0.1p64
 
 BUNDLED WITH
-   2.2.29
+   2.2.25

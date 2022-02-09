@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -21,15 +23,15 @@ gem 'puma', '~> 5.0'
 gem 'dotenv-rails', '2.7.6'
 gem 'enumerate_it', '3.2.1'
 gem 'grape', github: 'neocoin/grape', branch: 'master'
-gem 'service_actor', '3.1.2'
 gem 'httparty', '0.20.0'
-gem 'sentry-ruby', '4.6.4'
 gem 'sentry-rails', '4.6.4'
+gem 'sentry-ruby', '4.6.4'
+gem 'service_actor', '3.1.2'
 gem 'sidekiq', '~> 6.2.1'
 gem 'sidekiq-status', '2.0.2'
-gem 'statesman', '8.0.3'
-gem 'state_machines-activerecord', '0.8.0'
 gem 'sidekiq-throttled', '0.13.0'
+gem 'state_machines-activerecord', '0.8.0'
+gem 'statesman', '8.0.3'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -39,7 +41,7 @@ gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '6.2.0'
   gem 'faker', '2.18.0'
   gem 'rspec-rails', '5.0.1'
@@ -48,9 +50,9 @@ end
 group :development do
   gem 'annotate'
   gem 'brakeman', '5.1.1'
-  gem 'web-console', '4.1.0'
-  gem 'rack-mini-profiler', '2.3.3'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '2.3.3'
+  gem 'web-console', '4.1.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
@@ -60,11 +62,11 @@ group :test do
   gem 'capybara', '3.36.0'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
-  gem 'webdrivers'
   gem 'rails-controller-testing', '1.0.5'
   gem 'shoulda-matchers', '5.0.0'
+  gem 'webdrivers'
   gem 'webmock', '3.13.0'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
