@@ -87,7 +87,7 @@ RSpec.describe ClickSign::ProcessRequest, type: :client do
             .to_return(status: 502, body: request_response, headers: { 'Content-Type' => 'application/json' })
           allow(Sentry).to receive(:capture_message)
             .with(error_message, level: :fatal,
-                                 extra: { data: { 'code' => 502, 'response' => JSON.parse(request_response) } }
+              extra: { data: { 'code' => 502, 'response' => JSON.parse(request_response) } }
             )
             .and_return(true)
         end

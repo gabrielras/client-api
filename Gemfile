@@ -44,7 +44,12 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails', '6.2.0'
   gem 'faker', '2.18.0'
+  gem 'fasterer', '0.9.0'
   gem 'rspec-rails', '5.0.1'
+  gem 'rubocop', '1.25'
+  gem 'rubocop-performance', '1.13.2'
+  gem 'rubocop-rails', '2.13.2'
+  gem 'rubocop-rspec', '2.8.0'
 end
 
 group :development do
