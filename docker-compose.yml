@@ -1,0 +1,94 @@
+version: '3'
+networks:
+  development:
+  test:
+volumes:
+  db_data:
+  gem_cache:
+  shared_data:
+services:
+  redis:
+    image: redis:5.0.7-alpine
+    command: redis-server
+    networks:
+      - development
+      - test
+    volumes:
+      - shared_data:/var/shared/redis
+  client_api_db:
+    image: postgres:12.5-alpine
+    container_name: client_api_db
+    volumes:
+      - db_data:/var/lib/postgresql/data
+      - shared_data:/var/shared
+    networks:
+      - development
+      - test
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5099:5432
+  client_api:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: client_api
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+    networks:
+      - development
+    ports:
+      - 3000:3000
+    stdin_open: true
+    tty: true
+    env_file: .env.development
+    entrypoint: dev-entrypoint.sh
+    command: ['rails', 'server', '-p', '3000', '-b', '0.0.0.0']
+    environment:
+      RAILS_ENV: development
+    depends_on:
+      - client_api_db
+  sidekiq:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: sidekiq
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+    networks:
+      - development
+    env_file: .env.development
+    environment:
+      RAILS_ENV: development
+    entrypoint: sidekiq-entrypoint.sh
+    depends_on:
+      - client_api_db
+      - redis
+      - client_api
+  client_api_test:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: client_api_test
+    volumes:
+      - .:/var/app
+      - shared_data:/var/shared
+      - gem_cache:/usr/local/bundle/gems
+    networks:
+      - test
+    ports:
+      - 3001:3000
+    stdin_open: true
+    tty: true
+    env_file: .env.test
+    entrypoint: test-entrypoint.sh
+    command: ["rails", "-v"]
+    environment:
+      RAILS_ENV: test
+    depends_on:
+      - client_api_db
